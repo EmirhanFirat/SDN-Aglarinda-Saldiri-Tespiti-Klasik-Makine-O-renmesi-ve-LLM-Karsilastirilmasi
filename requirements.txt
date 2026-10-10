@@ -1,0 +1,20 @@
+# Alt sınırlar, kullandığımız özelliklere göre seçilmiştir. Bu oturumda yalnızca pandas 3.0 /
+# scikit-learn 1.9 ile test edildi; daha eski sürümler denenmedi. Kesin sürümler deney
+# sırasında outputs/environment.json dosyasına kaydedilir.
+
+numpy>=1.26          # default_rng, np.fromiter
+pandas>=2.1          # to_datetime(format="mixed"), hash_pandas_object, Int64
+scikit-learn>=1.3    # SimpleImputer(keep_empty_features=True) için >=1.2; ağaçlarda NaN desteği için >=1.3
+scipy>=1.11
+matplotlib>=3.8
+psutil>=5.9          # RAM ölçümü
+joblib>=1.3
+
+# Aşama 2 (bu oturumda KURULAMADI, kod henüz yok):
+# xgboost>=2.0
+
+# Aşama 3 (LLM karşılaştırması, ücretli API):
+# anthropic>=0.40
+
+# Geliştirme (isteğe bağlı; testler unittest ile de çalışır):
+# pytest>=8
