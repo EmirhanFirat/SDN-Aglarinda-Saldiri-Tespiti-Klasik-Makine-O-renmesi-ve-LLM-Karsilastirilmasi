@@ -1,0 +1,546 @@
+{
+  "version": "1",
+  "source": "source_sha256=55f18315dcc2d0d8d45ed4dde55c0dc1b301f6aa3ec6ef452ab5a6f1507989e5",
+  "digest": "ebdec6097e38d2fa0ae99d143fcb00bf005feca53563a42e6a050d5164575622",
+  "features": [
+    {
+      "name": "protocol",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": null,
+      "description": ""
+    },
+    {
+      "name": "flow_duration",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "tot_fwd_pkts",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "paket",
+      "description": ""
+    },
+    {
+      "name": "tot_bwd_pkts",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "paket",
+      "description": ""
+    },
+    {
+      "name": "totlen_fwd_pkts",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "totlen_bwd_pkts",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "fwd_pkt_len_max",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "fwd_pkt_len_min",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "fwd_pkt_len_mean",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "fwd_pkt_len_std",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "bwd_pkt_len_max",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "bwd_pkt_len_min",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "bwd_pkt_len_mean",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "bwd_pkt_len_std",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "flow_byts_s",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "1/saniye",
+      "description": ""
+    },
+    {
+      "name": "flow_pkts_s",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "1/saniye",
+      "description": ""
+    },
+    {
+      "name": "flow_iat_mean",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "flow_iat_std",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "flow_iat_max",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "flow_iat_min",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "fwd_iat_tot",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "fwd_iat_mean",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "fwd_iat_std",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "fwd_iat_max",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "fwd_iat_min",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "bwd_iat_tot",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "bwd_iat_mean",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "bwd_iat_std",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "bwd_iat_max",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "bwd_iat_min",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "fwd_psh_flags",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "adet",
+      "description": ""
+    },
+    {
+      "name": "bwd_psh_flags",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "adet",
+      "description": ""
+    },
+    {
+      "name": "fwd_urg_flags",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "adet",
+      "description": ""
+    },
+    {
+      "name": "bwd_urg_flags",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "adet",
+      "description": ""
+    },
+    {
+      "name": "fwd_header_len",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "bwd_header_len",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "fwd_pkts_s",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "1/saniye",
+      "description": ""
+    },
+    {
+      "name": "bwd_pkts_s",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "1/saniye",
+      "description": ""
+    },
+    {
+      "name": "pkt_len_min",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "pkt_len_max",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "pkt_len_mean",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "pkt_len_std",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "pkt_len_var",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "fin_flag_cnt",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "adet",
+      "description": ""
+    },
+    {
+      "name": "syn_flag_cnt",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "adet",
+      "description": ""
+    },
+    {
+      "name": "rst_flag_cnt",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "adet",
+      "description": ""
+    },
+    {
+      "name": "psh_flag_cnt",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "adet",
+      "description": ""
+    },
+    {
+      "name": "ack_flag_cnt",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "adet",
+      "description": ""
+    },
+    {
+      "name": "urg_flag_cnt",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "adet",
+      "description": ""
+    },
+    {
+      "name": "cwe_flag_count",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": null,
+      "description": ""
+    },
+    {
+      "name": "ece_flag_cnt",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "adet",
+      "description": ""
+    },
+    {
+      "name": "down_up_ratio",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": null,
+      "description": ""
+    },
+    {
+      "name": "pkt_size_avg",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": null,
+      "description": ""
+    },
+    {
+      "name": "fwd_seg_size_avg",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "bwd_seg_size_avg",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "fwd_byts_b_avg",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "fwd_pkts_b_avg",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": null,
+      "description": ""
+    },
+    {
+      "name": "fwd_blk_rate_avg",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": null,
+      "description": ""
+    },
+    {
+      "name": "bwd_byts_b_avg",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "bwd_pkts_b_avg",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": null,
+      "description": ""
+    },
+    {
+      "name": "bwd_blk_rate_avg",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": null,
+      "description": ""
+    },
+    {
+      "name": "subflow_fwd_pkts",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "paket",
+      "description": ""
+    },
+    {
+      "name": "subflow_fwd_byts",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "subflow_bwd_pkts",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "paket",
+      "description": ""
+    },
+    {
+      "name": "subflow_bwd_byts",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "init_fwd_win_byts",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "init_bwd_win_byts",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "fwd_act_data_pkts",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "paket",
+      "description": ""
+    },
+    {
+      "name": "fwd_seg_size_min",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "bayt",
+      "description": ""
+    },
+    {
+      "name": "active_mean",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "active_std",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "active_max",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "active_min",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "idle_mean",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "idle_std",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "idle_max",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    },
+    {
+      "name": "idle_min",
+      "dtype": "float64",
+      "unit": null,
+      "unit_guess": "mikrosaniye",
+      "description": ""
+    }
+  ]
+}

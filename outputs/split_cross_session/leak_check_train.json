@@ -1,0 +1,12 @@
+{
+  "threshold": 0.99,
+  "n_rows_used": 50000,
+  "flagged": {},
+  "top5": {
+    "bwd_header_len": 0.7973219945180912,
+    "fwd_pkt_len_max": 0.7666261603938112,
+    "totlen_fwd_pkts": 0.7652452829248372,
+    "subflow_fwd_byts": 0.7652452829248372,
+    "pkt_len_max": 0.7635046774001754
+  }
+}

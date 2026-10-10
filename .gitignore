@@ -2,6 +2,8 @@ __pycache__/
 *.pyc
 .venv/
 /data/
-/outputs/
+# Üretilen raporlar (json/md) depoda kalır; kayıt bazlı büyük CSV'ler ve makineye özgü ortam kaydı kalmaz
+/outputs/**/*.csv
+/outputs/environment.json
 *.zip
 *.pcap

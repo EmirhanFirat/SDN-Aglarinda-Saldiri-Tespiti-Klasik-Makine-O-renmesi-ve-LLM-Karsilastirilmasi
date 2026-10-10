@@ -1,0 +1,49 @@
+{
+  "rows_in": 343889,
+  "rows_unique_kept": 184667,
+  "rows_removed_as_copies": 159015,
+  "rows_excluded_conflicting_label": 207,
+  "conflicting_vectors": 79,
+  "by_class": {
+    "DDoS": {
+      "rows_before": 121942,
+      "unique_after": 1520,
+      "kept_share": 0.0125
+    },
+    "Probe": {
+      "rows_before": 98129,
+      "unique_after": 67061,
+      "kept_share": 0.6834
+    },
+    "Normal": {
+      "rows_before": 68424,
+      "unique_after": 64113,
+      "kept_share": 0.937
+    },
+    "DoS": {
+      "rows_before": 53616,
+      "unique_after": 50309,
+      "kept_share": 0.9383
+    },
+    "BFA": {
+      "rows_before": 1405,
+      "unique_after": 1300,
+      "kept_share": 0.9253
+    },
+    "Web-Attack": {
+      "rows_before": 192,
+      "unique_after": 183,
+      "kept_share": 0.9531
+    },
+    "BOTNET": {
+      "rows_before": 164,
+      "unique_after": 164,
+      "kept_share": 1.0
+    },
+    "U2R": {
+      "rows_before": 17,
+      "unique_after": 17,
+      "kept_share": 1.0
+    }
+  }
+}

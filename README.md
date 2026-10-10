@@ -53,6 +53,10 @@ make audit DATA=/yol/InSDN_DatasetCSV       # outputs/audit/{schema.json,audit.j
 make split DATA=/yol/InSDN_DatasetCSV       # outputs/dedupe/, outputs/split_within_run/, outputs/split_cross_session/
 ```
 
+Üretilen raporlar (`outputs/**/*.json|md`) depoda tutulur; kayıt bazlı büyük CSV'ler (`split_assignment.csv`, `record_weights.csv`) tutulmaz,
+`make split` ile yeniden üretilir (aynı tohum ve aynı veri → aynı bölme; `split_meta.json` içindeki SHA-256 özetleriyle doğrulanır).
+`outputs/environment.json` makineye özgüdür: kendi makinenizde `make env` ile üretin.
+
 InSDN lisansı CC BY-NC 4.0'dır (ticari olmayan kullanım, atıf gerekir). Veri dosyaları depoya eklenmez (`.gitignore`).
 
 ## Temel kurallar (kodda zorlanır)

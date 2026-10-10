@@ -1,0 +1,174 @@
+{
+  "n_rows": 343889,
+  "n_features": 77,
+  "class_counts": {
+    "DDoS": 121942,
+    "Probe": 98129,
+    "Normal": 68424,
+    "DoS": 53616,
+    "BFA": 1405,
+    "Web-Attack": 192,
+    "BOTNET": 164,
+    "U2R": 17
+  },
+  "binary_counts": {
+    "normal": 68424,
+    "attack": 275465
+  },
+  "class_counts_by_source": {
+    "Normal_data.csv": {
+      "Normal": 68424
+    },
+    "OVS.csv": {
+      "BFA": 1110,
+      "BOTNET": 164,
+      "DDoS": 48413,
+      "DoS": 52471,
+      "Probe": 36372,
+      "Web-Attack": 192
+    },
+    "metasploitable-2.csv": {
+      "BFA": 295,
+      "DDoS": 73529,
+      "DoS": 1145,
+      "Probe": 61757,
+      "U2R": 17
+    }
+  },
+  "missing_by_feature": {},
+  "inf_by_feature": {},
+  "constant_features": [
+    "fwd_psh_flags",
+    "fwd_urg_flags",
+    "cwe_flag_count",
+    "ece_flag_cnt",
+    "fwd_byts_b_avg",
+    "fwd_pkts_b_avg",
+    "fwd_blk_rate_avg",
+    "bwd_byts_b_avg",
+    "bwd_pkts_b_avg",
+    "bwd_blk_rate_avg",
+    "init_fwd_win_byts",
+    "fwd_seg_size_min"
+  ],
+  "duplicates": {
+    "extra_copies": 159143,
+    "rows_in_duplicate_sets": 173016,
+    "conflicting_label_vectors": 79,
+    "rows_in_conflicting_vectors": 207
+  },
+  "duplicates_by_class": {
+    "BFA": {
+      "rows": 1405,
+      "unique_vectors": 1377,
+      "duplicate_share": 0.0199
+    },
+    "BOTNET": {
+      "rows": 164,
+      "unique_vectors": 164,
+      "duplicate_share": 0.0
+    },
+    "DDoS": {
+      "rows": 121942,
+      "unique_vectors": 1520,
+      "duplicate_share": 0.9875
+    },
+    "DoS": {
+      "rows": 53616,
+      "unique_vectors": 50310,
+      "duplicate_share": 0.0617
+    },
+    "Normal": {
+      "rows": 68424,
+      "unique_vectors": 64114,
+      "duplicate_share": 0.063
+    },
+    "Probe": {
+      "rows": 98129,
+      "unique_vectors": 67140,
+      "duplicate_share": 0.3158
+    },
+    "U2R": {
+      "rows": 17,
+      "unique_vectors": 17,
+      "duplicate_share": 0.0
+    },
+    "Web-Attack": {
+      "rows": 192,
+      "unique_vectors": 183,
+      "duplicate_share": 0.0469
+    }
+  },
+  "source_file_binary_purity": {
+    "files_with_single_binary_label": [
+      "Normal_data.csv",
+      "OVS.csv",
+      "metasploitable-2.csv"
+    ],
+    "row_share": 1.0
+  },
+  "ip_purity": {
+    "src_ip": {
+      "unique": 122868,
+      "row_share_with_single_label_ip": 0.8904762874066923
+    },
+    "dst_ip": {
+      "unique": 1081,
+      "row_share_with_single_label_ip": 0.5649730000087237
+    }
+  },
+  "timestamp": {
+    "nat_count": 0,
+    "by_source": {
+      "Normal_data.csv": {
+        "min": "2019-12-31T14:25:49",
+        "max": "2020-02-07T19:53:00",
+        "nat": 0
+      },
+      "OVS.csv": {
+        "min": "2019-12-25T17:16:48",
+        "max": "2020-02-04T15:20:00",
+        "nat": 0
+      },
+      "metasploitable-2.csv": {
+        "min": "2020-01-09T16:29:00",
+        "max": "2020-01-10T20:57:00",
+        "nat": 0
+      }
+    }
+  },
+  "timestamp_shapes": {
+    "Normal_data.csv": {
+      "9/9/9999 99:99": 67716,
+      "99/99/9999 99:99:99 PM": 708
+    },
+    "OVS.csv": {
+      "99/99/9999 99:99:99 PM": 85103,
+      "9/9/9999 99:99": 52509,
+      "99/9/9999 9:99": 1110
+    },
+    "metasploitable-2.csv": {
+      "99/9/9999 9:99": 73832,
+      "9/9/9999 99:99": 62903,
+      "99/9/9999 99:99": 8
+    }
+  },
+  "flags": [
+    "Sabit özellik(ler): ['fwd_psh_flags', 'fwd_urg_flags', 'cwe_flag_count', 'ece_flag_cnt', 'fwd_byts_b_avg', 'fwd_pkts_b_avg', 'fwd_blk_rate_avg', 'bwd_byts_b_avg', 'bwd_pkts_b_avg', 'bwd_blk_rate_avg', 'init_fwd_win_byts', 'fwd_seg_size_min']",
+    "Tekrar eden özellik vektörleri var; aynı bölmeye konacak (grup bütünlüğü).",
+    "Aynı özellik vektörü farklı etiketlerle görülüyor (şüpheli etiket / ayırt edilemez kayıt).",
+    "Dosya adı ikili etiketi büyük ölçüde ele veriyor; source_file model girdisine verilmemeli.",
+    "Aynı dosyada birden fazla zaman damgası biçimi var (['Normal_data.csv', 'OVS.csv', 'metasploitable-2.csv']); dosyalar bir elektronik tabloda yeniden kaydedilmiş olabilir. Saniye hassasiyeti ve gün/ay sırası güvenilir değil."
+  ],
+  "data_origin": "file",
+  "source_sha256": "55f18315dcc2d0d8d45ed4dde55c0dc1b301f6aa3ec6ef452ab5a6f1507989e5",
+  "source_file_sha256": {
+    "Normal_data.csv": "75c5ea5e3526c9500e3d73cbdb11b99ff3fbfb8dac8dff8c39e9dd35d60556b3",
+    "OVS.csv": "8b218c16769dea961028d511928e7da139302afe341cea29dd65e526d580e092",
+    "metasploitable-2.csv": "5cc80c7b5707bf92d3ea501a9af8b488cc4680f0a5b29b5b608e92bbe6e297a7"
+  },
+  "unknown_labels": [],
+  "coerced_to_nan": {},
+  "non_numeric_columns_skipped": [],
+  "schema_digest": "ebdec6097e38d2fa0ae99d143fcb00bf005feca53563a42e6a050d5164575622"
+}

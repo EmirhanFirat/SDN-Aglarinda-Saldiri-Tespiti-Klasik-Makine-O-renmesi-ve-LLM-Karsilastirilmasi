@@ -1,0 +1,12 @@
+{
+  "threshold": 0.99,
+  "n_rows_used": 50000,
+  "flagged": {},
+  "top5": {
+    "init_bwd_win_byts": 0.8136033083585271,
+    "pkt_len_max": 0.8077751133826004,
+    "pkt_size_avg": 0.7995674396575618,
+    "pkt_len_std": 0.798290373079518,
+    "pkt_len_var": 0.798290373079518
+  }
+}

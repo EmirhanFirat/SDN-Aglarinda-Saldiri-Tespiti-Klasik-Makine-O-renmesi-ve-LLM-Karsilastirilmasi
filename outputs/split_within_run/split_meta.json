@@ -1,0 +1,118 @@
+{
+  "params": {
+    "design": "within_run",
+    "seed": 42,
+    "dedupe": true,
+    "dedupe_summary": {
+      "rows_in": 343889,
+      "rows_unique_kept": 184667,
+      "rows_removed_as_copies": 159015,
+      "rows_excluded_conflicting_label": 207,
+      "conflicting_vectors": 79
+    },
+    "split": {
+      "ratios": [
+        0.6,
+        0.2,
+        0.2
+      ],
+      "names": [
+        "train",
+        "val",
+        "test"
+      ],
+      "strategy": "random",
+      "time_block_seconds": null,
+      "min_test_support": 30
+    },
+    "cross_session": null,
+    "schema_digest": "ebdec6097e38d2fa0ae99d143fcb00bf005feca53563a42e6a050d5164575622",
+    "source_sha256": "55f18315dcc2d0d8d45ed4dde55c0dc1b301f6aa3ec6ef452ab5a6f1507989e5"
+  },
+  "report": {
+    "strategy": "random",
+    "seed": 42,
+    "ratios_target": {
+      "train": 0.6,
+      "val": 0.2,
+      "test": 0.2
+    },
+    "ratios_achieved": {
+      "train": 0.599998916969464,
+      "val": 0.2000140793969686,
+      "test": 0.19998700363356745
+    },
+    "rows_by_split": {
+      "train": 110800,
+      "val": 36936,
+      "test": 36931
+    },
+    "groups_by_split": {
+      "train": 50660,
+      "val": 28196,
+      "test": 28193
+    },
+    "class_counts_by_split": {
+      "BFA": {
+        "train": 780,
+        "val": 260,
+        "test": 260
+      },
+      "BOTNET": {
+        "train": 98,
+        "val": 34,
+        "test": 32
+      },
+      "DDoS": {
+        "train": 912,
+        "val": 304,
+        "test": 304
+      },
+      "DoS": {
+        "train": 30185,
+        "val": 10062,
+        "test": 10062
+      },
+      "Normal": {
+        "train": 38468,
+        "val": 12823,
+        "test": 12822
+      },
+      "Probe": {
+        "train": 40237,
+        "val": 13412,
+        "test": 13412
+      },
+      "U2R": {
+        "train": 10,
+        "val": 4,
+        "test": 3
+      },
+      "Web-Attack": {
+        "train": 110,
+        "val": 37,
+        "test": 36
+      }
+    },
+    "group_info": {
+      "keys_used": [
+        "flow_id_fragments_gap_300s",
+        "duplicate_feature_vector"
+      ],
+      "warnings": [],
+      "n_groups": 107049,
+      "n_singleton_groups": 64035,
+      "largest_group_share": 0.0009801426351215973,
+      "group_size_p50": 1.0,
+      "group_size_p95": 4.0
+    },
+    "warnings": [
+      "Sınıf 'U2R' test kümesinde 3 kayıt (< 30): bu sınıf için güvenilir ölçüm iddia edilemez."
+    ]
+  },
+  "record_id_sha256_by_split": {
+    "test": "567bff426c202ef59a5aa486f5e0e2c4a05db3a2cc392f6abab2948cc2b394f5",
+    "train": "f545b5d46bab7695931ed40c7be22bcf70990fcdb1f3810367611faad0d01fb9",
+    "val": "c6ec653e203f1a5ad62f408b0d356a6f971ce2021d154db2ed7861c6a652d2c3"
+  }
+}

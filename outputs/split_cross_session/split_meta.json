@@ -1,0 +1,147 @@
+{
+  "params": {
+    "design": "cross_session",
+    "seed": 42,
+    "dedupe": true,
+    "dedupe_summary": {
+      "rows_in": 343889,
+      "rows_unique_kept": 184667,
+      "rows_removed_as_copies": 159015,
+      "rows_excluded_conflicting_label": 207,
+      "conflicting_vectors": 79
+    },
+    "split": {
+      "ratios": [
+        0.6,
+        0.2,
+        0.2
+      ],
+      "names": [
+        "train",
+        "val",
+        "test"
+      ],
+      "strategy": "random",
+      "time_block_seconds": null,
+      "min_test_support": 30
+    },
+    "cross_session": {
+      "target_files": [
+        "metasploitable-2.csv"
+      ],
+      "shared_files": [
+        "Normal_data.csv"
+      ],
+      "shared_target_fraction": 0.2,
+      "trainval_ratios": [
+        0.75,
+        0.25
+      ],
+      "time_block_seconds": 300
+    },
+    "schema_digest": "ebdec6097e38d2fa0ae99d143fcb00bf005feca53563a42e6a050d5164575622",
+    "source_sha256": "55f18315dcc2d0d8d45ed4dde55c0dc1b301f6aa3ec6ef452ab5a6f1507989e5"
+  },
+  "report": {
+    "rows_by_split": {
+      "train": 95193,
+      "val": 29120,
+      "test": 60354
+    },
+    "groups_by_split": {
+      "train": 33860,
+      "val": 13273,
+      "test": 14566
+    },
+    "groups_per_class": {
+      "BFA": 704,
+      "BOTNET": 82,
+      "DDoS": 1520,
+      "DoS": 25422,
+      "Normal": 7,
+      "Probe": 33849,
+      "U2R": 17,
+      "Web-Attack": 98
+    },
+    "class_counts_by_split": {
+      "BFA": {
+        "train": 813,
+        "val": 271,
+        "test": 216
+      },
+      "BOTNET": {
+        "train": 124,
+        "val": 40,
+        "test": 0
+      },
+      "DDoS": {
+        "train": 71,
+        "val": 23,
+        "test": 1426
+      },
+      "DoS": {
+        "train": 37084,
+        "val": 12361,
+        "test": 864
+      },
+      "Normal": {
+        "train": 40807,
+        "val": 10993,
+        "test": 12313
+      },
+      "Probe": {
+        "train": 16157,
+        "val": 5386,
+        "test": 45518
+      },
+      "U2R": {
+        "train": 0,
+        "val": 0,
+        "test": 17
+      },
+      "Web-Attack": {
+        "train": 137,
+        "val": 46,
+        "test": 0
+      }
+    },
+    "group_info": {
+      "keys_used": [
+        "flow_id_fragments_gap_300s",
+        "time_block_300s"
+      ],
+      "warnings": [],
+      "n_groups": 61699,
+      "n_singleton_groups": 30835,
+      "largest_group_share": 0.12419111156839067,
+      "group_size_p50": 2.0,
+      "group_size_p95": 4.0
+    },
+    "warnings": [
+      "En büyük grup kayıtların %12.4'ini içeriyor; bölme beklenen dağılımı vermeyebilir.",
+      "Sınıf 'BOTNET' test bölmesinde yok; bu sınıf için bu tasarımda ölçüm yapılamaz.",
+      "Sınıf 'U2R' eğitim bölmesinde yok; model bu sınıfı hiç görmeyecek.",
+      "Sınıf 'U2R' test bölmesinde 17 kayıt (< 30): güvenilir ölçüm iddia edilemez.",
+      "Sınıf 'Web-Attack' test bölmesinde yok; bu sınıf için bu tasarımda ölçüm yapılamaz."
+    ],
+    "design": "cross_session",
+    "seed": 42,
+    "target_files": [
+      "metasploitable-2.csv"
+    ],
+    "shared_files": [
+      "Normal_data.csv"
+    ],
+    "shared_target_fraction": 0.2,
+    "trainval_ratios": [
+      0.75,
+      0.25
+    ],
+    "time_block_seconds": 300
+  },
+  "record_id_sha256_by_split": {
+    "test": "b2a366bf77658f7b98f7ac2af228c0bda653bded7aabdc83b092dccdff402651",
+    "train": "d1221e78376ad781b693c82bf0f9bdd26ef58a85a3214cf1b05c4b9861b34e00",
+    "val": "42766320a808776226eca63ba080636d3b19dd05b056f9c55562d9f5a132dfb9"
+  }
+}
