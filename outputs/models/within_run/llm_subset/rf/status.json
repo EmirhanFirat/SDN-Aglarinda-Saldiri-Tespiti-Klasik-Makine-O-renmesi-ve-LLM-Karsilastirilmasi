@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "model": "rf",
+  "design": "within_run",
+  "feature_set": "llm_subset",
+  "test_evaluated": true,
+  "at_utc": "2026-10-10T12:59:21.297818+00:00"
+}

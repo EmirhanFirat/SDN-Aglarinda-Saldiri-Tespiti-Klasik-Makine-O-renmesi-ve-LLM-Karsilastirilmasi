@@ -1,0 +1,8 @@
+{
+  "status": "skipped",
+  "reason": "'xgboost' paketi kurulu değil (No module named 'xgboost')",
+  "model": "xgboost",
+  "design": "within_run",
+  "feature_set": "llm_subset",
+  "at_utc": "2026-10-10T12:59:21.346373+00:00"
+}

@@ -9,7 +9,7 @@ Bu belge, hangi sütunun neden modele girdiğini veya girmediğini açıklar. Ko
 | Etiket | `label`, `label_raw`, `binary_label` | Hayır | Cevabın kendisi |
 | Defter tutma | `record_id`, `source_file`, `group_id`, `split`, `scenario_id` | Hayır | `source_file` dosya adı etiketi ele verir (ör. `Normal_data.csv` ⇒ Normal) |
 | Kimlik | `flow_id`, `src_ip`, `dst_ip`, `timestamp` | Hayır | Aşağıya bakın; denetim ve bölme için saklanır |
-| Portlar | `src_port`, `dst_port` | Hayır (varsayılan) | `src_port` geçici ve rastgele; `dst_port` servisi gösterdiği için meşru olabilir ama saldırı araçlarının hedef portları veri kümesine özgü bir iz bırakabilir. Aşama 2'de "dst_port ile / dst_port olmadan" karşılaştırması yapılacak |
+| Portlar | `src_port`, `dst_port` | Hayır (varsayılan) | `src_port` geçici ve rastgele; `dst_port` servisi gösterdiği için meşru olabilir ama saldırı araçlarının hedef portları veri kümesine özgü bir iz bırakabilir. "dst_port ile / dst_port olmadan" karşılaştırması Aşama 2'de **yapılmadı**; isteğe bağlı ek deney olarak bekliyor. Şimdilik bütün modeller (ve ileride LLM) portsuz, aynı bilgiyle karşılaştırılıyor |
 | Akış özellikleri | `protocol` dahil CICFlowMeter sayısal özellikleri | Evet | Davranışı tanımlar |
 
 ## Neden IP ve zaman damgası modele verilmiyor?

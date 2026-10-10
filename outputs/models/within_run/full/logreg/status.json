@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "model": "logreg",
+  "design": "within_run",
+  "feature_set": "full",
+  "test_evaluated": true,
+  "at_utc": "2026-10-10T12:52:01.375096+00:00"
+}

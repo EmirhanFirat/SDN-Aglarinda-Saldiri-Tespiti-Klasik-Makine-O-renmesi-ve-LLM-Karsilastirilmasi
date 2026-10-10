@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "model": "rf",
+  "design": "cross_session",
+  "feature_set": "full",
+  "test_evaluated": true,
+  "at_utc": "2026-10-10T13:04:39.478261+00:00"
+}

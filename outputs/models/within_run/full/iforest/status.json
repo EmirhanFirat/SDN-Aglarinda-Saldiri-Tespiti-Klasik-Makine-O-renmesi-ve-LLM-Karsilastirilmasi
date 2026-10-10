@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "model": "iforest",
+  "design": "within_run",
+  "feature_set": "full",
+  "test_evaluated": true,
+  "at_utc": "2026-10-10T12:56:35.486691+00:00"
+}

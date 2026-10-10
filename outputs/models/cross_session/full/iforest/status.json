@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "model": "iforest",
+  "design": "cross_session",
+  "feature_set": "full",
+  "test_evaluated": true,
+  "at_utc": "2026-10-10T13:05:39.887865+00:00"
+}

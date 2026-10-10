@@ -1,0 +1,312 @@
+{
+  "per_seed": {
+    "42": {
+      "native": {
+        "accuracy": 0.6528120007581707,
+        "attack_precision": 0.6528120007581707,
+        "attack_recall": 1.0,
+        "attack_f1": 0.7899410222804718,
+        "normal_precision": NaN,
+        "normal_recall": 0.0,
+        "normal_f1": 0.0,
+        "macro_f1": 0.3949705111402359,
+        "weighted_f1": 0.5156829792358695,
+        "fpr": 1.0,
+        "fnr": 0.0,
+        "tn": 0.0,
+        "fp": 12822.0,
+        "fn": 0.0,
+        "tp": 24109.0,
+        "n_normal": 12822.0,
+        "n_attack": 24109.0,
+        "pr_auc": 0.6528120007581707
+      }
+    }
+  },
+  "aggregate": {
+    "native": {
+      "accuracy": {
+        "mean": 0.6528120007581707,
+        "std": 0.0,
+        "min": 0.6528120007581707,
+        "max": 0.6528120007581707,
+        "n": 1
+      },
+      "attack_precision": {
+        "mean": 0.6528120007581707,
+        "std": 0.0,
+        "min": 0.6528120007581707,
+        "max": 0.6528120007581707,
+        "n": 1
+      },
+      "attack_recall": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "attack_f1": {
+        "mean": 0.7899410222804718,
+        "std": 0.0,
+        "min": 0.7899410222804718,
+        "max": 0.7899410222804718,
+        "n": 1
+      },
+      "macro_f1": {
+        "mean": 0.3949705111402359,
+        "std": 0.0,
+        "min": 0.3949705111402359,
+        "max": 0.3949705111402359,
+        "n": 1
+      },
+      "weighted_f1": {
+        "mean": 0.5156829792358695,
+        "std": 0.0,
+        "min": 0.5156829792358695,
+        "max": 0.5156829792358695,
+        "n": 1
+      },
+      "fpr": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "fnr": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "pr_auc": {
+        "mean": 0.6528120007581707,
+        "std": 0.0,
+        "min": 0.6528120007581707,
+        "max": 0.6528120007581707,
+        "n": 1
+      }
+    }
+  },
+  "primary_seed": 42,
+  "primary_seed_details": {
+    "native": {
+      "ci_time_block": {
+        "metrics": {
+          "accuracy": {
+            "point": 0.6528120007581707,
+            "low": 0.3901353954794499,
+            "high": 0.7890701603962246
+          },
+          "attack_precision": {
+            "point": 0.6528120007581707,
+            "low": 0.3901353954794499,
+            "high": 0.7890701603962246
+          },
+          "attack_recall": {
+            "point": 1.0,
+            "low": 1.0,
+            "high": 1.0
+          },
+          "attack_f1": {
+            "point": 0.7899410222804718,
+            "low": 0.5611796725917351,
+            "high": 0.8820997087951802
+          },
+          "macro_f1": {
+            "point": 0.3949705111402359,
+            "low": 0.28058983629586753,
+            "high": 0.4410498543975901
+          },
+          "weighted_f1": {
+            "point": 0.5156829792358695,
+            "low": 0.21909111836716486,
+            "high": 0.6960406119972691
+          },
+          "fpr": {
+            "point": 1.0,
+            "low": 1.0,
+            "high": 1.0
+          },
+          "fnr": {
+            "point": 0.0,
+            "low": 0.0,
+            "high": 0.0
+          },
+          "pr_auc": {
+            "point": 0.6528120007581707,
+            "low": 0.3901353954794499,
+            "high": 0.7890701603962246
+          }
+        },
+        "n_clusters": 169,
+        "n_records": 36931,
+        "n_boot": 300,
+        "alpha": 0.05,
+        "seed": 42
+      },
+      "ci_leak_group": {
+        "metrics": {
+          "accuracy": {
+            "point": 0.6528120007581707,
+            "low": 0.648086112339467,
+            "high": 0.6577661183171649
+          },
+          "attack_precision": {
+            "point": 0.6528120007581707,
+            "low": 0.648086112339467,
+            "high": 0.6577661183171649
+          },
+          "attack_recall": {
+            "point": 1.0,
+            "low": 1.0,
+            "high": 1.0
+          },
+          "attack_f1": {
+            "point": 0.7899410222804718,
+            "low": 0.7864711764229907,
+            "high": 0.7935571984659422
+          },
+          "macro_f1": {
+            "point": 0.3949705111402359,
+            "low": 0.39323558821149535,
+            "high": 0.3967785992329711
+          },
+          "weighted_f1": {
+            "point": 0.5156829792358695,
+            "low": 0.5097010482559433,
+            "high": 0.5219750381683876
+          },
+          "fpr": {
+            "point": 1.0,
+            "low": 1.0,
+            "high": 1.0
+          },
+          "fnr": {
+            "point": 0.0,
+            "low": 0.0,
+            "high": 0.0
+          },
+          "pr_auc": {
+            "point": 0.6528120007581707,
+            "low": 0.648086112339467,
+            "high": 0.6577661183171649
+          }
+        },
+        "n_clusters": 28193,
+        "n_records": 36931,
+        "n_boot": 300,
+        "alpha": 0.05,
+        "seed": 42
+      },
+      "per_class": [
+        {
+          "sınıf": "Normal",
+          "n": 12822,
+          "doğru_sayısı": 0,
+          "oran": 0.0,
+          "oran_adı": "özgüllük (doğru Normal)",
+          "wilson_alt": 0.0,
+          "wilson_üst": 0.00029952030594234064,
+          "güvenilir": true
+        },
+        {
+          "sınıf": "BFA",
+          "n": 260,
+          "doğru_sayısı": 260,
+          "oran": 1.0,
+          "oran_adı": "yakalama (recall)",
+          "wilson_alt": 0.9854397486977035,
+          "wilson_üst": 0.9999999999999999,
+          "güvenilir": true
+        },
+        {
+          "sınıf": "BOTNET",
+          "n": 32,
+          "doğru_sayısı": 32,
+          "oran": 1.0,
+          "oran_adı": "yakalama (recall)",
+          "wilson_alt": 0.8928172849426366,
+          "wilson_üst": 1.0,
+          "güvenilir": true
+        },
+        {
+          "sınıf": "DDoS",
+          "n": 304,
+          "doğru_sayısı": 304,
+          "oran": 1.0,
+          "oran_adı": "yakalama (recall)",
+          "wilson_alt": 0.9875208548812114,
+          "wilson_üst": 0.9999999999999999,
+          "güvenilir": true
+        },
+        {
+          "sınıf": "DoS",
+          "n": 10062,
+          "doğru_sayısı": 10062,
+          "oran": 1.0,
+          "oran_adı": "yakalama (recall)",
+          "wilson_alt": 0.9996183528260566,
+          "wilson_üst": 0.9999999999999999,
+          "güvenilir": true
+        },
+        {
+          "sınıf": "Probe",
+          "n": 13412,
+          "doğru_sayısı": 13412,
+          "oran": 1.0,
+          "oran_adı": "yakalama (recall)",
+          "wilson_alt": 0.9997136519560577,
+          "wilson_üst": 1.0,
+          "güvenilir": true
+        },
+        {
+          "sınıf": "U2R",
+          "n": 3,
+          "doğru_sayısı": 3,
+          "oran": 1.0,
+          "oran_adı": "yakalama (recall)",
+          "wilson_alt": 0.43849391955098227,
+          "wilson_üst": 1.0,
+          "güvenilir": false
+        },
+        {
+          "sınıf": "Web-Attack",
+          "n": 36,
+          "doğru_sayısı": 36,
+          "oran": 1.0,
+          "oran_adı": "yakalama (recall)",
+          "wilson_alt": 0.9035781695514236,
+          "wilson_üst": 1.0,
+          "güvenilir": true
+        }
+      ],
+      "weighted_by_n_copies": {
+        "accuracy": 0.771327291576096,
+        "attack_precision": 0.771327291576096,
+        "attack_recall": 1.0,
+        "attack_f1": 0.8709031868297841,
+        "normal_precision": NaN,
+        "normal_recall": 0.0,
+        "normal_f1": 0.0,
+        "macro_f1": 0.43545159341489204,
+        "weighted_f1": 0.6717513963224081,
+        "fpr": 1.0,
+        "fnr": 0.0,
+        "tn": 0.0,
+        "fp": 13676.0,
+        "fn": 0.0,
+        "tp": 46130.0,
+        "n_normal": 13676.0,
+        "n_attack": 46130.0,
+        "pr_auc": 0.771327291576096
+      }
+    }
+  },
+  "n_records": 36931,
+  "n_attack": 24109,
+  "n_time_block_clusters": 169,
+  "n_leak_groups": 28193
+}

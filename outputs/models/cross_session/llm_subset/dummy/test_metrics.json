@@ -1,0 +1,292 @@
+{
+  "per_seed": {
+    "42": {
+      "native": {
+        "accuracy": 0.7959870099744839,
+        "attack_precision": 0.7959870099744839,
+        "attack_recall": 1.0,
+        "attack_f1": 0.8864061995479496,
+        "normal_precision": NaN,
+        "normal_recall": 0.0,
+        "normal_f1": 0.0,
+        "macro_f1": 0.4432030997739748,
+        "weighted_f1": 0.7055678204010181,
+        "fpr": 1.0,
+        "fnr": 0.0,
+        "tn": 0.0,
+        "fp": 12313.0,
+        "fn": 0.0,
+        "tp": 48041.0,
+        "n_normal": 12313.0,
+        "n_attack": 48041.0,
+        "pr_auc": 0.7959870099744839
+      }
+    }
+  },
+  "aggregate": {
+    "native": {
+      "accuracy": {
+        "mean": 0.7959870099744839,
+        "std": 0.0,
+        "min": 0.7959870099744839,
+        "max": 0.7959870099744839,
+        "n": 1
+      },
+      "attack_precision": {
+        "mean": 0.7959870099744839,
+        "std": 0.0,
+        "min": 0.7959870099744839,
+        "max": 0.7959870099744839,
+        "n": 1
+      },
+      "attack_recall": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "attack_f1": {
+        "mean": 0.8864061995479496,
+        "std": 0.0,
+        "min": 0.8864061995479496,
+        "max": 0.8864061995479496,
+        "n": 1
+      },
+      "macro_f1": {
+        "mean": 0.4432030997739748,
+        "std": 0.0,
+        "min": 0.4432030997739748,
+        "max": 0.4432030997739748,
+        "n": 1
+      },
+      "weighted_f1": {
+        "mean": 0.7055678204010181,
+        "std": 0.0,
+        "min": 0.7055678204010181,
+        "max": 0.7055678204010181,
+        "n": 1
+      },
+      "fpr": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0,
+        "n": 1
+      },
+      "fnr": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "n": 1
+      },
+      "pr_auc": {
+        "mean": 0.7959870099744839,
+        "std": 0.0,
+        "min": 0.7959870099744839,
+        "max": 0.7959870099744839,
+        "n": 1
+      }
+    }
+  },
+  "primary_seed": 42,
+  "primary_seed_details": {
+    "native": {
+      "ci_time_block": {
+        "metrics": {
+          "accuracy": {
+            "point": 0.7959870099744839,
+            "low": 0.13025619199886382,
+            "high": 0.9093918651592658
+          },
+          "attack_precision": {
+            "point": 0.7959870099744839,
+            "low": 0.13025619199886382,
+            "high": 0.9093918651592658
+          },
+          "attack_recall": {
+            "point": 1.0,
+            "low": 1.0,
+            "high": 1.0
+          },
+          "attack_f1": {
+            "point": 0.8864061995479496,
+            "low": 0.23048955377445077,
+            "high": 0.952546075316805
+          },
+          "macro_f1": {
+            "point": 0.4432030997739748,
+            "low": 0.11524477688722538,
+            "high": 0.4762730376584025
+          },
+          "weighted_f1": {
+            "point": 0.7055678204010181,
+            "low": 0.03002283022327688,
+            "high": 0.8662376550017266
+          },
+          "fpr": {
+            "point": 1.0,
+            "low": 1.0,
+            "high": 1.0
+          },
+          "fnr": {
+            "point": 0.0,
+            "low": 0.0,
+            "high": 0.0
+          },
+          "pr_auc": {
+            "point": 0.7959870099744839,
+            "low": 0.13025619199886382,
+            "high": 0.9093918651592658
+          }
+        },
+        "n_clusters": 100,
+        "n_records": 60354,
+        "n_boot": 300,
+        "alpha": 0.05,
+        "seed": 42
+      },
+      "ci_leak_group": {
+        "metrics": {
+          "accuracy": {
+            "point": 0.7959870099744839,
+            "low": 0.5649665405591452,
+            "high": 1.0
+          },
+          "attack_precision": {
+            "point": 0.7959870099744839,
+            "low": 0.5649665405591452,
+            "high": 1.0
+          },
+          "attack_recall": {
+            "point": 1.0,
+            "low": 1.0,
+            "high": 1.0
+          },
+          "attack_f1": {
+            "point": 0.8864061995479496,
+            "low": 0.7220173881610195,
+            "high": 1.0
+          },
+          "macro_f1": {
+            "point": 0.4432030997739748,
+            "low": 0.36100869408050973,
+            "high": 1.0
+          },
+          "weighted_f1": {
+            "point": 0.7055678204010181,
+            "low": 0.407915692957271,
+            "high": 1.0
+          },
+          "fpr": {
+            "point": 1.0,
+            "low": 1.0,
+            "high": 1.0
+          },
+          "fnr": {
+            "point": 0.0,
+            "low": 0.0,
+            "high": 0.0
+          },
+          "pr_auc": {
+            "point": 0.7959870099744839,
+            "low": 0.5639416983340454,
+            "high": 0.7978600617217207
+          }
+        },
+        "n_clusters": 14566,
+        "n_records": 60354,
+        "n_boot": 300,
+        "alpha": 0.05,
+        "seed": 42
+      },
+      "per_class": [
+        {
+          "sınıf": "Normal",
+          "n": 12313,
+          "doğru_sayısı": 0,
+          "oran": 0.0,
+          "oran_adı": "özgüllük (doğru Normal)",
+          "wilson_alt": 0.0,
+          "wilson_üst": 0.0003118981411598246,
+          "güvenilir": true
+        },
+        {
+          "sınıf": "BFA",
+          "n": 216,
+          "doğru_sayısı": 216,
+          "oran": 1.0,
+          "oran_adı": "yakalama (recall)",
+          "wilson_alt": 0.9825256002503623,
+          "wilson_üst": 1.0,
+          "güvenilir": true
+        },
+        {
+          "sınıf": "DDoS",
+          "n": 1426,
+          "doğru_sayısı": 1426,
+          "oran": 1.0,
+          "oran_adı": "yakalama (recall)",
+          "wilson_alt": 0.997313268826421,
+          "wilson_üst": 1.0,
+          "güvenilir": true
+        },
+        {
+          "sınıf": "DoS",
+          "n": 864,
+          "doğru_sayısı": 864,
+          "oran": 1.0,
+          "oran_adı": "yakalama (recall)",
+          "wilson_alt": 0.9955733857422827,
+          "wilson_üst": 0.9999999999999999,
+          "güvenilir": true
+        },
+        {
+          "sınıf": "Probe",
+          "n": 45518,
+          "doğru_sayısı": 45518,
+          "oran": 1.0,
+          "oran_adı": "yakalama (recall)",
+          "wilson_alt": 0.999915609741061,
+          "wilson_üst": 0.9999999999999999,
+          "güvenilir": true
+        },
+        {
+          "sınıf": "U2R",
+          "n": 17,
+          "doğru_sayısı": 17,
+          "oran": 1.0,
+          "oran_adı": "yakalama (recall)",
+          "wilson_alt": 0.8156763396284354,
+          "wilson_üst": 1.0,
+          "güvenilir": false
+        }
+      ],
+      "weighted_by_n_copies": {
+        "accuracy": 0.8296385542168675,
+        "attack_precision": 0.8296385542168675,
+        "attack_recall": 1.0,
+        "attack_f1": 0.9068879230870539,
+        "normal_precision": NaN,
+        "normal_recall": 0.0,
+        "normal_f1": 0.0,
+        "macro_f1": 0.45344396154352695,
+        "weighted_f1": 0.7523891853466812,
+        "fpr": 1.0,
+        "fnr": 0.0,
+        "tn": 0.0,
+        "fp": 14847.0,
+        "fn": 0.0,
+        "tp": 72303.0,
+        "n_normal": 14847.0,
+        "n_attack": 72303.0,
+        "pr_auc": 0.8296385542168675
+      }
+    }
+  },
+  "n_records": 60354,
+  "n_attack": 48041,
+  "n_time_block_clusters": 100,
+  "n_leak_groups": 14566
+}

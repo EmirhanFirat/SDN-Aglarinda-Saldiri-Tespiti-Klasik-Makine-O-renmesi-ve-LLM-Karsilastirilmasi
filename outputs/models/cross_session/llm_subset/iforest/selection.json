@@ -1,0 +1,101 @@
+{
+  "criterion": "val_pr_auc",
+  "grid": [
+    {
+      "params": {
+        "max_samples": 256
+      },
+      "val_pr_auc": 0.7223482934595362,
+      "fit_seconds": 0.8985352020004029
+    },
+    {
+      "params": {
+        "max_samples": 2048
+      },
+      "val_pr_auc": 0.8343637122760776,
+      "fit_seconds": 0.9107300589998886
+    }
+  ],
+  "best_params": {
+    "max_samples": 2048
+  },
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "per_seed": {
+    "42": {
+      "thresholds": {
+        "train_normal_q99": 0.5849034072575607,
+        "val_f1": 0.381439632842639
+      },
+      "train_resources": {
+        "seconds": 0.8859666869998364,
+        "rss_before_mb": 800.124928,
+        "rss_after_mb": 800.124928,
+        "rss_delta_mb": 0.0,
+        "process_peak_rss_mb": 959.344
+      },
+      "warnings": []
+    },
+    "43": {
+      "thresholds": {
+        "train_normal_q99": 0.5720649016961007,
+        "val_f1": 0.37771329188092956
+      },
+      "train_resources": {
+        "seconds": 0.9339692329999707,
+        "rss_before_mb": 800.124928,
+        "rss_after_mb": 800.124928,
+        "rss_delta_mb": 0.0,
+        "process_peak_rss_mb": 959.344
+      },
+      "warnings": []
+    },
+    "44": {
+      "thresholds": {
+        "train_normal_q99": 0.5752062964028681,
+        "val_f1": 0.37740149345976143
+      },
+      "train_resources": {
+        "seconds": 0.977523820999977,
+        "rss_before_mb": 800.124928,
+        "rss_after_mb": 800.124928,
+        "rss_delta_mb": 0.0,
+        "process_peak_rss_mb": 959.344
+      },
+      "warnings": []
+    },
+    "45": {
+      "thresholds": {
+        "train_normal_q99": 0.5712135477317833,
+        "val_f1": 0.37363832187313806
+      },
+      "train_resources": {
+        "seconds": 1.0276009760000306,
+        "rss_before_mb": 800.124928,
+        "rss_after_mb": 800.124928,
+        "rss_delta_mb": 0.0,
+        "process_peak_rss_mb": 959.344
+      },
+      "warnings": []
+    },
+    "46": {
+      "thresholds": {
+        "train_normal_q99": 0.5794858848015035,
+        "val_f1": 0.3792992690039791
+      },
+      "train_resources": {
+        "seconds": 1.0341961060003086,
+        "rss_before_mb": 800.124928,
+        "rss_after_mb": 800.124928,
+        "rss_delta_mb": 0.0,
+        "process_peak_rss_mb": 959.344
+      },
+      "warnings": []
+    }
+  }
+}

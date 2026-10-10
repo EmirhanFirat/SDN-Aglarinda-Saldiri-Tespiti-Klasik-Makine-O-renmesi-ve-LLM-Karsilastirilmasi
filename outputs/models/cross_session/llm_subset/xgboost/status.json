@@ -1,0 +1,8 @@
+{
+  "status": "skipped",
+  "reason": "'xgboost' paketi kurulu değil (No module named 'xgboost')",
+  "model": "xgboost",
+  "design": "cross_session",
+  "feature_set": "llm_subset",
+  "at_utc": "2026-10-10T13:08:00.844032+00:00"
+}

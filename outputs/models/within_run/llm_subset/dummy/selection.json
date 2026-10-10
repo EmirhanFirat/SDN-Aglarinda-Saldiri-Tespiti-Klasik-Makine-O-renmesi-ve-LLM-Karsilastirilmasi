@@ -1,0 +1,29 @@
+{
+  "criterion": "val_pr_auc",
+  "grid": [
+    {
+      "params": {},
+      "val_pr_auc": 0.6528319254927442,
+      "fit_seconds": 0.3299051159999635
+    }
+  ],
+  "best_params": {},
+  "seeds": [
+    42
+  ],
+  "per_seed": {
+    "42": {
+      "thresholds": {
+        "native": null
+      },
+      "train_resources": {
+        "seconds": 0.2951911919999475,
+        "rss_before_mb": 780.128256,
+        "rss_after_mb": 780.128256,
+        "rss_delta_mb": 0.0,
+        "process_peak_rss_mb": 959.344
+      },
+      "warnings": []
+    }
+  }
+}

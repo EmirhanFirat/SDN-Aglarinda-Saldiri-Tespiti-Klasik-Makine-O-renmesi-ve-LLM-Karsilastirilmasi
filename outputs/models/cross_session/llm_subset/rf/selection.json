@@ -1,0 +1,120 @@
+{
+  "criterion": "val_pr_auc",
+  "grid": [
+    {
+      "params": {
+        "max_depth": 12,
+        "min_samples_leaf": 1
+      },
+      "val_pr_auc": 0.999999335922909,
+      "fit_seconds": 7.1598917639998945
+    },
+    {
+      "params": {
+        "max_depth": 12,
+        "min_samples_leaf": 5
+      },
+      "val_pr_auc": 0.9999986915038694,
+      "fit_seconds": 8.114812766999876
+    },
+    {
+      "params": {
+        "max_depth": null,
+        "min_samples_leaf": 1
+      },
+      "val_pr_auc": 0.9999994115866041,
+      "fit_seconds": 7.79645661099994
+    },
+    {
+      "params": {
+        "max_depth": null,
+        "min_samples_leaf": 5
+      },
+      "val_pr_auc": 0.9999987161290533,
+      "fit_seconds": 8.369943000000148
+    }
+  ],
+  "best_params": {
+    "max_depth": null,
+    "min_samples_leaf": 1
+  },
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "per_seed": {
+    "42": {
+      "thresholds": {
+        "p0.5": 0.5,
+        "val_f1": 0.6666666666666666
+      },
+      "train_resources": {
+        "seconds": 8.960184530999868,
+        "rss_before_mb": 798.539776,
+        "rss_after_mb": 798.539776,
+        "rss_delta_mb": 0.0,
+        "process_peak_rss_mb": 959.344
+      },
+      "warnings": []
+    },
+    "43": {
+      "thresholds": {
+        "p0.5": 0.5,
+        "val_f1": 0.5533333333333333
+      },
+      "train_resources": {
+        "seconds": 7.532713686000079,
+        "rss_before_mb": 798.539776,
+        "rss_after_mb": 798.539776,
+        "rss_delta_mb": 0.0,
+        "process_peak_rss_mb": 959.344
+      },
+      "warnings": []
+    },
+    "44": {
+      "thresholds": {
+        "p0.5": 0.5,
+        "val_f1": 0.64
+      },
+      "train_resources": {
+        "seconds": 7.267597307999949,
+        "rss_before_mb": 798.539776,
+        "rss_after_mb": 800.124928,
+        "rss_delta_mb": 1.5851519999999937,
+        "process_peak_rss_mb": 959.344
+      },
+      "warnings": []
+    },
+    "45": {
+      "thresholds": {
+        "p0.5": 0.5,
+        "val_f1": 0.6466666666666666
+      },
+      "train_resources": {
+        "seconds": 7.1345006209999156,
+        "rss_before_mb": 800.124928,
+        "rss_after_mb": 800.124928,
+        "rss_delta_mb": 0.0,
+        "process_peak_rss_mb": 959.344
+      },
+      "warnings": []
+    },
+    "46": {
+      "thresholds": {
+        "p0.5": 0.5,
+        "val_f1": 0.6266666666666667
+      },
+      "train_resources": {
+        "seconds": 7.442783175000386,
+        "rss_before_mb": 800.124928,
+        "rss_after_mb": 800.124928,
+        "rss_delta_mb": 0.0,
+        "process_peak_rss_mb": 959.344
+      },
+      "warnings": []
+    }
+  }
+}

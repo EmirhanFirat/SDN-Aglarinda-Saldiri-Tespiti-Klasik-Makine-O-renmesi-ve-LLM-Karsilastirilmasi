@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "model": "dummy",
+  "design": "cross_session",
+  "feature_set": "llm_subset",
+  "test_evaluated": true,
+  "at_utc": "2026-10-10T13:05:50.961437+00:00"
+}

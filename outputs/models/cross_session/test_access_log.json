@@ -1,0 +1,82 @@
+[
+  {
+    "at_utc": "2026-10-10T13:00:33.541156+00:00",
+    "model": "dummy",
+    "feature_set": "full",
+    "best_params": {},
+    "config_hash": "4adcf230d749aa12",
+    "test_sha256": "b2a366bf77658f7b98f7ac2af228c0bda653bded7aabdc83b092dccdff402651"
+  },
+  {
+    "at_utc": "2026-10-10T13:01:34.305681+00:00",
+    "model": "logreg",
+    "feature_set": "full",
+    "best_params": {
+      "C": 1.0,
+      "class_weight": "balanced"
+    },
+    "config_hash": "4adcf230d749aa12",
+    "test_sha256": "b2a366bf77658f7b98f7ac2af228c0bda653bded7aabdc83b092dccdff402651"
+  },
+  {
+    "at_utc": "2026-10-10T13:04:39.474520+00:00",
+    "model": "rf",
+    "feature_set": "full",
+    "best_params": {
+      "max_depth": null,
+      "min_samples_leaf": 1
+    },
+    "config_hash": "4adcf230d749aa12",
+    "test_sha256": "b2a366bf77658f7b98f7ac2af228c0bda653bded7aabdc83b092dccdff402651"
+  },
+  {
+    "at_utc": "2026-10-10T13:05:39.886573+00:00",
+    "model": "iforest",
+    "feature_set": "full",
+    "best_params": {
+      "max_samples": 2048
+    },
+    "config_hash": "4adcf230d749aa12",
+    "test_sha256": "b2a366bf77658f7b98f7ac2af228c0bda653bded7aabdc83b092dccdff402651"
+  },
+  {
+    "at_utc": "2026-10-10T13:05:50.959340+00:00",
+    "model": "dummy",
+    "feature_set": "llm_subset",
+    "best_params": {},
+    "config_hash": "4adcf230d749aa12",
+    "test_sha256": "b2a366bf77658f7b98f7ac2af228c0bda653bded7aabdc83b092dccdff402651"
+  },
+  {
+    "at_utc": "2026-10-10T13:06:20.585932+00:00",
+    "model": "logreg",
+    "feature_set": "llm_subset",
+    "best_params": {
+      "C": 10.0,
+      "class_weight": "balanced"
+    },
+    "config_hash": "4adcf230d749aa12",
+    "test_sha256": "b2a366bf77658f7b98f7ac2af228c0bda653bded7aabdc83b092dccdff402651"
+  },
+  {
+    "at_utc": "2026-10-10T13:08:00.802462+00:00",
+    "model": "rf",
+    "feature_set": "llm_subset",
+    "best_params": {
+      "max_depth": null,
+      "min_samples_leaf": 1
+    },
+    "config_hash": "4adcf230d749aa12",
+    "test_sha256": "b2a366bf77658f7b98f7ac2af228c0bda653bded7aabdc83b092dccdff402651"
+  },
+  {
+    "at_utc": "2026-10-10T13:08:56.411236+00:00",
+    "model": "iforest",
+    "feature_set": "llm_subset",
+    "best_params": {
+      "max_samples": 2048
+    },
+    "config_hash": "4adcf230d749aa12",
+    "test_sha256": "b2a366bf77658f7b98f7ac2af228c0bda653bded7aabdc83b092dccdff402651"
+  }
+]

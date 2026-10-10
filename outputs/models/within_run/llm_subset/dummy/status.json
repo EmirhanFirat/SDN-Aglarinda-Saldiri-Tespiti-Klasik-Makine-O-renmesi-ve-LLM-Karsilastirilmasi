@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "model": "dummy",
+  "design": "within_run",
+  "feature_set": "llm_subset",
+  "test_evaluated": true,
+  "at_utc": "2026-10-10T12:56:45.180842+00:00"
+}
