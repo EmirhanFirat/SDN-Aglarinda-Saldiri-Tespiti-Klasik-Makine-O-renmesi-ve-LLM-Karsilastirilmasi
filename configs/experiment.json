@@ -16,5 +16,16 @@
     "trainval_ratios": [0.75, 0.25],
     "time_block_seconds": 300
   },
-  "audit": {"leak_threshold": 0.99, "leak_max_rows": 50000}
+  "audit": {"leak_threshold": 0.99, "leak_max_rows": 50000},
+  "models": {
+    "n_seeds": 5,
+    "n_jobs": -1,
+    "feature_sets": ["full", "llm_subset"],
+    "latency": {"n_single": 500, "warmup": 50, "batch_size": 1000},
+    "bootstrap": {"n_boot": 300, "alpha": 0.05, "time_block_seconds": 300},
+    "logreg": {"max_iter": 2000},
+    "rf": {"n_estimators": 150},
+    "xgboost": {"n_estimators": 300},
+    "iforest": {"n_estimators": 200, "train_normal_quantile": 0.99}
+  }
 }
