@@ -115,5 +115,76 @@ class SplitLeakageTests(unittest.TestCase):
                 load_split(d)
 
 
+class FragmentRuleTests(unittest.TestCase):
+    """flow_id birleştirmesi: aynı dosya + aynı flow_id + en çok 300 sn arayla (elle kurulmuş küçük tablo)."""
+
+    @staticmethod
+    def _frame():
+        t0 = pd.Timestamp("2020-02-05 10:00:00")
+        rows = [
+            # r0 ve r1: aynı bağlantının iki parçası (60 sn arayla)  -> aynı grup olmalı
+            ("r0", "A.csv", "10.0.0.1-10.0.0.2-1000-80-6", t0, 1.0),
+            ("r1", "A.csv", "10.0.0.1-10.0.0.2-1000-80-6", t0 + pd.Timedelta(seconds=60), 2.0),
+            # r2: aynı flow_id ama 3 hafta sonra -> YENİ bağlantı, ayrı grup olmalı
+            ("r2", "A.csv", "10.0.0.1-10.0.0.2-1000-80-6", t0 + pd.Timedelta(days=21), 3.0),
+            # r3: aynı flow_id, FARKLI dosya -> asla birleşmez
+            ("r3", "B.csv", "10.0.0.1-10.0.0.2-1000-80-6", t0 + pd.Timedelta(seconds=30), 4.0),
+            # r4: başka bir bağlantı
+            ("r4", "A.csv", "10.0.0.9-10.0.0.2-2000-80-6", t0, 5.0),
+        ]
+        return pd.DataFrame(rows, columns=["record_id", "source_file", "flow_id", "timestamp", "f1"])
+
+    def test_close_fragments_share_group_far_apart_do_not(self):
+        df = self._frame()
+        codes, info = build_groups(df, ["f1"])
+        self.assertEqual(codes[0], codes[1])
+        self.assertNotEqual(codes[0], codes[2])
+        self.assertNotEqual(codes[0], codes[3])
+        self.assertNotEqual(codes[0], codes[4])
+        self.assertIn("flow_id_fragments_gap_300s", info["keys_used"])
+
+    def test_chain_of_close_fragments_is_one_group(self):
+        # Her parça bir öncekinden 200 sn sonra: zincir boyunca tek bağlantı sayılır.
+        t0 = pd.Timestamp("2020-02-05 10:00:00")
+        df = pd.DataFrame(
+            {
+                "record_id": [f"r{i}" for i in range(6)],
+                "source_file": "A.csv",
+                "flow_id": "X",
+                "timestamp": [t0 + pd.Timedelta(seconds=200 * i) for i in range(6)],
+                "f1": np.arange(6.0),
+            }
+        )
+        codes, _ = build_groups(df, ["f1"])
+        self.assertEqual(len(set(codes)), 1)
+
+    def test_without_time_gap_same_flow_id_always_merges(self):
+        df = self._frame()
+        codes, _ = build_groups(df, ["f1"], fragment_gap_seconds=None)
+        self.assertEqual(codes[0], codes[2])  # eski davranış: zaman sınırı yok
+        self.assertNotEqual(codes[0], codes[3])  # farklı dosya yine birleşmez
+
+    def test_verify_flags_split_of_adjacent_fragments_but_not_far_apart_rows(self):
+        df = self._frame()
+        feats = ["f1"]
+        codes, _ = build_groups(df, feats)
+        ids = df["record_id"].tolist()
+
+        # r2 (3 hafta sonraki aynı flow_id) farklı bölmede olabilir -> ihlal DEĞİL
+        ok = pd.Series(["train", "train", "test", "train", "train"], index=ids)
+        self.assertEqual(verify_split_integrity(df, codes, ok, feats), [])
+
+        # r0 ve r1 (60 sn arayla) farklı bölmelerde -> ihlal
+        bad = pd.Series(["train", "test", "train", "train", "train"], index=ids)
+        problems = verify_split_integrity(df, np.arange(len(df)), bad, feats)  # grup bilgisi bilerek yetersiz
+        self.assertTrue(any("bağlantı parçası" in p for p in problems), problems)
+
+    def test_missing_timestamp_is_handled_conservatively(self):
+        df = self._frame()
+        df.loc[2, "timestamp"] = pd.NaT  # zamanı bilinmeyen parça: aralık bilinemez -> bağla
+        codes, _ = build_groups(df, ["f1"])
+        self.assertEqual(codes[0], codes[2])
+
+
 if __name__ == "__main__":
     unittest.main()

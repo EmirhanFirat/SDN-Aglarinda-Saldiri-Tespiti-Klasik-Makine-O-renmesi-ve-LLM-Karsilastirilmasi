@@ -61,6 +61,42 @@ def _row_hash(df: pd.DataFrame, feature_cols: Sequence[str]) -> np.ndarray:
     return pd.util.hash_pandas_object(df[list(feature_cols)], index=False).to_numpy()
 
 
+def _basename(name: str) -> str:
+    return str(name).replace("\\", "/").rsplit("/", 1)[-1]
+
+
+def _fragment_links(
+    df: pd.DataFrame, flow_id_col: str, source_col: str, time_col: str, gap_seconds: float | None
+) -> tuple[np.ndarray, np.ndarray]:
+    """Aynı bağlantının ardışık parçalarını bağlayan (önceki_satır, sonraki_satır) çiftlerini döndürür.
+
+    Parça tanımı: aynı kaynak dosya + aynı flow_id + başlangıçları en çok `gap_seconds` arayla.
+    Neden zaman sınırı? CICFlowMeter uzun bağlantıyı zaman aşımıyla parçalar; parçalar birbirine
+    yakındır. Haftalar sonra aynı beşliyle (ör. periyodik DNS) görülen akış YENİ bir bağlantıdır;
+    onları birleştirmek tüm bir trafik sınıfını tek dev gruba zincirler (gerçek InSDN'de görüldü).
+    Zaman damgası yoksa (veya gap_seconds=None) aynı flow_id her zaman aynı parça sayılır.
+    """
+    n = len(df)
+    ids = df[flow_id_col]
+    key = (df[source_col].astype(str) + "|" + ids.astype(str)) if source_col in df.columns else ids.astype(str)
+    key = key.where(ids.notna())
+    use_time = gap_seconds is not None and time_col in df.columns and pd.api.types.is_datetime64_any_dtype(df[time_col])
+    secs = (df[time_col] - df[time_col].min()).dt.total_seconds() if use_time else pd.Series(np.zeros(n))
+    tmp = pd.DataFrame({"k": key.to_numpy(), "t": secs.to_numpy(), "i": np.arange(n)}).dropna(subset=["k"])
+    tmp = tmp.sort_values(["k", "t", "i"], kind="stable")
+    same_key = tmp["k"].eq(tmp["k"].shift())
+    if use_time:
+        gap = tmp["t"] - tmp["t"].shift()
+        # Zaman damgası eksikse aralık bilinemez: muhafazakâr davran, bağla.
+        close = (gap <= float(gap_seconds)) | gap.isna() | tmp["t"].isna() | tmp["t"].shift().isna()
+        link = same_key & close
+    else:
+        link = same_key
+    prev_i = tmp["i"].shift().to_numpy()[link.to_numpy()].astype(np.int64)
+    cur_i = tmp["i"].to_numpy()[link.to_numpy()]
+    return prev_i, cur_i
+
+
 def build_groups(
     df: pd.DataFrame,
     feature_cols: Sequence[str],
@@ -68,19 +104,33 @@ def build_groups(
     flow_id_col: str = "flow_id",
     source_col: str = "source_file",
     time_col: str = "timestamp",
-    time_block_seconds: float | None = 300.0,
+    time_block_seconds: float | None = None,
+    time_block_files: Sequence[str] | None = None,
+    fragment_gap_seconds: float | None = 300.0,
     use_flow_id: bool = True,
     use_duplicates: bool = True,
 ) -> tuple[np.ndarray, dict]:
-    """Her kayıt için grup kodu (0..G-1) ve bilgi sözlüğü döndürür."""
+    """Her kayıt için grup kodu (0..G-1) ve bilgi sözlüğü döndürür.
+
+    flow_id kuralı: aynı kaynak dosya + aynı flow_id + en çok `fragment_gap_seconds` arayla
+    başlayan akışlar aynı bağlantının parçası sayılır (bkz. _fragment_links).
+    time_block_seconds verilirse zaman bloğu gruplaması yapılır; time_block_files ile yalnızca
+    belirtilen dosyalara uygulanabilir (dosya adının son bileşeniyle eşleşir).
+    NOT: Gerçek InSDN'de saldırılar çok kısa kayıtlardır; zaman bloğu + tekrar kuralı birlikte
+    dev gruplar üretir (bkz. docs/veri_sozlugu.md). Varsayılan bu yüzden kapalıdır.
+    """
     n = len(df)
     uf = _UnionFind(n)
     info: dict = {"keys_used": [], "warnings": []}
 
     if use_flow_id:
         if flow_id_col in df.columns:
-            _union_by_key(uf, df[flow_id_col])
-            info["keys_used"].append("flow_id")
+            prev_i, cur_i = _fragment_links(df, flow_id_col, source_col, time_col, fragment_gap_seconds)
+            for a, b in zip(prev_i.tolist(), cur_i.tolist()):
+                uf.union(a, b)
+            info["keys_used"].append(
+                f"flow_id_fragments_gap_{int(fragment_gap_seconds)}s" if fragment_gap_seconds else "flow_id"
+            )
         else:
             info["warnings"].append(f"'{flow_id_col}' sütunu yok; bağlantı parçaları gruplanamadı.")
     if use_duplicates:
@@ -90,13 +140,16 @@ def build_groups(
         if time_col in df.columns and source_col in df.columns and pd.api.types.is_datetime64_any_dtype(df[time_col]):
             t = df[time_col]
             valid = t.notna()
+            if time_block_files is not None:
+                wanted = {_basename(f) for f in time_block_files}
+                valid = valid & df[source_col].map(_basename).isin(wanted)
             if valid.any():
                 secs = (t - t.min()).dt.total_seconds()
                 block = np.floor(secs / float(time_block_seconds)).astype("Int64").astype(str)
                 key = (df[source_col].astype(str) + "|" + block).where(valid)
                 _union_by_key(uf, key)
                 info["keys_used"].append(f"time_block_{int(time_block_seconds)}s")
-            if (~valid).any():
+            if time_block_files is None and (~valid).any():
                 info["warnings"].append(
                     f"{int((~valid).sum())} kayıtta zaman damgası yok; zaman bloğuyla gruplanamadı."
                 )
@@ -190,7 +243,7 @@ def make_split(
     names: Sequence[str] = ("train", "val", "test"),
     seed: int = 42,
     strategy: str = "random",
-    time_block_seconds: float | None = 300.0,
+    time_block_seconds: float | None = None,
     min_test_support: int = 30,
     group_kwargs: dict | None = None,
 ) -> SplitResult:
@@ -260,6 +313,145 @@ def make_split(
     )
 
 
+def _report_for_assignment(
+    df: pd.DataFrame,
+    codes: np.ndarray,
+    split_arr: np.ndarray,
+    names: Sequence[str],
+    ginfo: dict,
+    *,
+    label_col: str,
+    min_test_support: int,
+    extra: dict,
+) -> dict:
+    """Sınıf x bölme tablosunu ve uyarıları üretir (oran hedefi olmayan tasarımlar için)."""
+    names = list(names)
+    counts = pd.crosstab(df[label_col].to_numpy(), split_arr).reindex(columns=names, fill_value=0)
+    rows = {s: int((split_arr == s).sum()) for s in names}
+    groups_by_split = pd.Series(codes).groupby(split_arr).nunique().to_dict()
+    groups_per_class = (pd.crosstab(codes, df[label_col].to_numpy()) > 0).sum(axis=0)
+    test_name, train_name = names[-1], names[0]
+    warnings = list(ginfo["warnings"])
+    if ginfo["largest_group_share"] > 0.10:
+        warnings.append(
+            f"En büyük grup kayıtların %{ginfo['largest_group_share'] * 100:.1f}'ini içeriyor; "
+            "bölme beklenen dağılımı vermeyebilir."
+        )
+    for cls in counts.index:
+        n_test, n_train = int(counts.loc[cls, test_name]), int(counts.loc[cls, train_name])
+        if n_train == 0:
+            warnings.append(f"Sınıf '{cls}' eğitim bölmesinde yok; model bu sınıfı hiç görmeyecek.")
+        if n_test == 0:
+            warnings.append(f"Sınıf '{cls}' {test_name} bölmesinde yok; bu sınıf için bu tasarımda ölçüm yapılamaz.")
+        elif n_test < min_test_support:
+            warnings.append(
+                f"Sınıf '{cls}' {test_name} bölmesinde {n_test} kayıt (< {min_test_support}): "
+                "güvenilir ölçüm iddia edilemez."
+            )
+    return {
+        "rows_by_split": rows,
+        "groups_by_split": {s: int(groups_by_split.get(s, 0)) for s in names},
+        "groups_per_class": {str(c): int(v) for c, v in groups_per_class.items()},
+        "class_counts_by_split": {str(c): {s: int(counts.loc[c, s]) for s in names} for c in counts.index},
+        "group_info": ginfo,
+        "warnings": warnings,
+        **extra,
+    }
+
+
+def make_domain_holdout_split(
+    df: pd.DataFrame,
+    feature_cols: Sequence[str],
+    *,
+    target_files: Sequence[str],
+    shared_files: Sequence[str],
+    shared_target_fraction: float = 0.2,
+    trainval_ratios: Sequence[float] = (0.75, 0.25),
+    names: Sequence[str] = ("train", "val", "test"),
+    seed: int = 42,
+    label_col: str = "label",
+    record_col: str = "record_id",
+    source_col: str = "source_file",
+    time_col: str = "timestamp",
+    time_block_seconds: float = 300.0,
+    min_test_support: int = 30,
+) -> SplitResult:
+    """Koşular arası (senaryo bazlı) bölme.
+
+    * target_files: tamamı TEST olur (ör. farklı kurban makinede alınmış yakalama).
+    * shared_files: tek dosyada bulunan sınıflar için (ör. Normal_data.csv). Zaman bloklarına
+      ayrılır; kronolojik olarak son `shared_target_fraction` kısmı TEST olur, öncesi kaynak alana gider.
+    * Kalan her şey kaynak alandır; grup bütünlüğüyle train/val'e `trainval_ratios` oranında bölünür.
+    Hiçbir grup birden fazla bölmeye dağılmaz. Test'te bulunmayan sınıflar raporda uyarı olarak çıkar.
+    """
+    names = list(names)
+    if len(names) != 3 or len(trainval_ratios) != 2:
+        raise ValueError("names üç, trainval_ratios iki elemanlı olmalı.")
+    base = df[source_col].map(_basename).to_numpy()
+    tgt = {_basename(f) for f in target_files}
+    shr = {_basename(f) for f in shared_files}
+    if tgt & shr:
+        raise ValueError("Bir dosya hem target hem shared olamaz.")
+    missing = (tgt | shr) - set(base)
+    if missing:
+        raise ValueError(f"Veride bulunmayan dosya(lar): {sorted(missing)}")
+
+    codes, ginfo = build_groups(
+        df,
+        feature_cols,
+        source_col=source_col,
+        time_col=time_col,
+        use_duplicates=False,
+        time_block_seconds=time_block_seconds,
+        time_block_files=sorted(shr),
+    )
+    G = int(codes.max()) + 1
+    if (pd.Series(base).groupby(codes).nunique() > 1).any():
+        raise RuntimeError("Bir grup birden fazla kaynak dosyadan kayıt içeriyor; gruplama kuralı hatalı.")
+    group_file = pd.Series(base).groupby(codes).first().reindex(range(G)).to_numpy()
+    t = df[time_col]
+    secs = (t - t.min()).dt.total_seconds().to_numpy()
+    gtime = pd.Series(secs).groupby(codes).min().reindex(range(G)).to_numpy()
+    gsize = np.bincount(codes, minlength=G)
+
+    TRAIN, VAL, TEST = 0, 1, 2
+    gsplit = np.full(G, -1, dtype=np.int64)
+    gsplit[np.isin(group_file, sorted(tgt))] = TEST
+    for f in sorted(shr):
+        gs = np.where(group_file == f)[0]
+        if np.isnan(gtime[gs]).any():
+            raise ValueError(f"{f}: zaman damgası olmayan grup var; kronolojik ayırma yapılamaz.")
+        gs = gs[np.argsort(gtime[gs], kind="stable")]
+        mid = (np.cumsum(gsize[gs]) - gsize[gs] / 2.0) / gsize[gs].sum()
+        gsplit[gs[mid > 1.0 - shared_target_fraction]] = TEST
+
+    src_groups = np.where(gsplit == -1)[0]
+    ct = pd.crosstab(codes, df[label_col].to_numpy()).reindex(range(G), fill_value=0)
+    gsplit[src_groups] = assign_groups(ct.to_numpy()[src_groups], trainval_ratios, seed=seed, strategy="random")
+
+    split_arr = np.asarray(names, dtype=object)[gsplit[codes]]
+    assignment = pd.Series(split_arr, index=df[record_col].to_numpy(), name="split")
+    report = _report_for_assignment(
+        df,
+        codes,
+        split_arr,
+        names,
+        ginfo,
+        label_col=label_col,
+        min_test_support=min_test_support,
+        extra={
+            "design": "cross_session",
+            "seed": seed,
+            "target_files": sorted(tgt),
+            "shared_files": sorted(shr),
+            "shared_target_fraction": shared_target_fraction,
+            "trainval_ratios": list(map(float, trainval_ratios)),
+            "time_block_seconds": time_block_seconds,
+        },
+    )
+    return SplitResult(record_ids=df[record_col].tolist(), group_ids=codes, assignment=assignment, report=report)
+
+
 def verify_split_integrity(
     df: pd.DataFrame,
     group_ids: np.ndarray,
@@ -268,6 +460,7 @@ def verify_split_integrity(
     *,
     record_col: str = "record_id",
     flow_id_col: str = "flow_id",
+    fragment_gap_seconds: float | None = 300.0,
 ) -> list[str]:
     """Sızıntı ihlallerini metin listesi olarak döndürür; boş liste = ihlal yok."""
     problems: list[str] = []
@@ -289,10 +482,11 @@ def verify_split_integrity(
         problems.append(f"{bad} birebir aynı özellik vektörü birden fazla bölmede.")
 
     if flow_id_col in df.columns:
-        fid = pd.DataFrame({"f": df[flow_id_col].to_numpy(), "s": split}).dropna(subset=["f"])
-        bad = int((fid.groupby("f")["s"].nunique() > 1).sum())
+        # Bağımsız yeniden türetme: aynı bağlantının ardışık parçaları aynı bölmede olmalı.
+        prev_i, cur_i = _fragment_links(df, flow_id_col, "source_file", "timestamp", fragment_gap_seconds)
+        bad = int((split[prev_i] != split[cur_i]).sum())
         if bad:
-            problems.append(f"{bad} flow_id birden fazla bölmede.")
+            problems.append(f"{bad} bağlantı parçası çifti farklı bölmelere dağılmış.")
     return problems
 
 

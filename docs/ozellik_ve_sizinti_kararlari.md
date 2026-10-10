@@ -20,11 +20,51 @@ Bu belge, hangi sütunun neden modele girdiğini veya girmediğini açıklar. Ko
 
 ## Veri bölme
 
-- Gruplama: aynı `flow_id`, birebir aynı özellik vektörü, aynı dosyada aynı zaman bloğu (varsayılan 300 sn).
-- Grup bütünlüğü oranlardan önceliklidir; oranlar tutmazsa uyarı üretilir, grup bölünmez.
-- **Sınırlılık:** InSDN'de senaryo/koşu kimliği olduğuna dair bilgi README'de yok; zaman bloğu yalnızca bir yaklaşımdır. Gerçek zaman damgaları gelince blok boyutu duyarlılığı raporlanacak.
-- Bölme `split_assignment.csv` olarak kaydedilir, test kayıt kimliklerinin SHA-256 özeti `split_meta.json` içinde tutulur; değiştirilirse `load_split` hata verir.
-- Test bölümünde 30'dan az kaydı olan sınıf için "güvenilir ölçüm iddia edilemez" uyarısı üretilir (`min_test_support`).
+### Önce tekrarları indirge
+
+Gerçek InSDN'de kayıtların yaklaşık yarısı (343.889 → 184.667 benzersiz) birebir aynı özellik vektörüdür; en uç örnek DDoS:
+121.942 satır yalnızca 1.520 benzersiz vektör. Bunları bölmeye dağıtmak, aynı kaydı hem eğitime hem teste koymak demektir.
+Bu yüzden önce `deduplicate_vectors` ile aynı vektörler tek kayıtta toplanır (`n_copies` ağırlık olarak saklanır, **özellik olarak asla kullanılmaz**).
+Aynı vektör iki farklı etiketle görülüyorsa (79 vektör, 207 satır) kayıtlar dışlanır ve `outputs/dedupe/excluded_conflicting_label.csv` içinde listelenir.
+
+### Gruplama kuralları
+
+1. **Bağlantı parçaları:** aynı kaynak dosya + aynı `flow_id` + başlangıçları en çok 300 sn arayla. CICFlowMeter uzun bağlantıyı zaman aşımıyla
+   parçalar; parçalar aynı bağlantıdır. Zaman sınırı şart: haftalar sonra aynı 5'li ile görülen akış yeni bağlantıdır; sınırsız birleştirme
+   gerçek veride tüm Normal trafiği tek dev gruba zincirliyordu (hata bulundu, düzeltildi, testi yazıldı).
+2. **Birebir aynı özellik vektörü** aynı gruba gider (dedupe sonrası normalde kalmaz; savunma amaçlı).
+3. **Zaman bloğu** (varsayılan kapalı): saldırı yakalamaları çok kısa olduğundan blok + tekrar kuralı birlikte dev gruplar üretti. Yalnızca `cross_session` tasarımında Normal dosyasına uygulanır.
+
+Doğrulama (`verify_split_integrity`) bölme kodundan bağımsız olarak "grup bölünmüş mü, aynı vektör iki bölmede mi, ardışık parçalar ayrılmış mı" kontrol eder.
+
+### İki bölme tasarımı
+
+| | `within_run` | `cross_session` |
+|---|---|---|
+| Fikir | Gruplara göre rastgele %60/%20/%20 (sınıf bazında dengeli) | Test = hiç görülmemiş yakalama oturumu |
+| Test | Eğitimle aynı yakalamalardan | `metasploitable-2.csv` tamamı + `Normal_data.csv`'nin kronolojik olarak son %20'si (7 Şubat 13:50–19:53) |
+| Ne ölçer | Aynı ortam içinde ayırt edebilme (**iyimser** tahmin) | Başka oturuma genelleme (araştırma sorusu 5) |
+| Zayıflığı | Aynı koşunun komşu akışları hâlâ birbirine benzer olabilir | Bazı sınıflar testte yok / eğitimde yok (aşağıda) |
+
+`cross_session` sınıf kapsamı (benzersiz kayıtlar): BOTNET ve Web-Attack yalnızca `OVS.csv`'de bulunduğundan **testte yok** (ölçülemez);
+U2R yalnızca `metasploitable-2.csv`'de bulunduğundan **eğitimde yok** ve testte 17 kayıt (< 30). DDoS'un eğitim/doğrulamadaki payı yalnızca 94 benzersiz vektör.
+Bu uyarılar `split_meta.json` ve betik çıktısında otomatik üretilir; rapora aynen taşınacaktır.
+
+### Kaçınılmaz sınırlılık: yakalama ortamı karışıklığı
+
+Normal trafik ayrı bir yakalamadan (`Normal_data.csv`), saldırılar başka yakalamalardan gelir. Model "saldırıyı" değil "hangi yakalamadan geldiğini"
+öğreniyor olabilir. Elimizdeki bilgiyle bunu ayıramayız; `cross_session` bu riski azaltır ama ortadan kaldırmaz. Rapor bu sınırlılığı açıkça yazacaktır.
+
+### Zaman damgası güvenilirliği
+
+Üç dosyada da birden fazla zaman damgası biçimi var (elektronik tabloda yeniden kaydedilmiş görünüyor). Gün/ay sırasını gün-önce olarak okuyoruz
+(`5/2/2020` = 5 Şubat; dosya tarihleriyle tutarlı). Çoğu damga dakika hassasiyetinde; saniye düzeyinde sıralama yapılamaz. Bölme artık bu hassasiyetle
+yetinecek biçimde (300 sn blok) tasarlandı.
+
+### Kayıt ve değişmezlik
+
+Bölme `split_assignment.csv` olarak kaydedilir, her bölmenin kayıt kimliklerinin SHA-256 özeti `split_meta.json` içinde tutulur; değiştirilirse `load_split` hata verir.
+Test bölümünde 30'dan az kaydı olan sınıf için "güvenilir ölçüm iddia edilemez" uyarısı üretilir (`min_test_support`).
 
 ## Öğrenilenler yalnızca eğitimden
 

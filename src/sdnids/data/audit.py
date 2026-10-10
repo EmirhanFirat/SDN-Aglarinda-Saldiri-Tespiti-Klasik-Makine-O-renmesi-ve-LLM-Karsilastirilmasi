@@ -75,6 +75,16 @@ def audit_quality(
     if report["duplicates"]["conflicting_label_vectors"]:
         flags.append("Aynı özellik vektörü farklı etiketlerle görülüyor (şüpheli etiket / ayırt edilemez kayıt).")
 
+    per_class = pd.DataFrame({"h": row_hash, "y": df[label_col].to_numpy()}).groupby("y")["h"].agg(["size", "nunique"])
+    report["duplicates_by_class"] = {
+        str(c): {
+            "rows": int(r["size"]),
+            "unique_vectors": int(r["nunique"]),
+            "duplicate_share": round(1.0 - float(r["nunique"]) / float(r["size"]), 4),
+        }
+        for c, r in per_class.iterrows()
+    }
+
     if source_col in df.columns:
         per_file = pd.DataFrame({"f": df[source_col].to_numpy(), "b": binary}).groupby("f")["b"].nunique()
         pure = per_file[per_file == 1].index
@@ -117,6 +127,16 @@ def audit_quality(
         report["timestamp"] = {"nat_count": int(t.isna().sum()), "by_source": by_source}
         if report["timestamp"]["nat_count"]:
             flags.append("Zaman damgası ayrıştırılamayan kayıtlar var (dayfirst/biçim kontrol edilmeli).")
+
+    shapes = df.attrs.get("timestamp_shapes")
+    if shapes:
+        report["timestamp_shapes"] = shapes
+        mixed = [f for f, s in shapes.items() if len(s) > 1]
+        if mixed:
+            flags.append(
+                f"Aynı dosyada birden fazla zaman damgası biçimi var ({mixed}); dosyalar bir elektronik "
+                "tabloda yeniden kaydedilmiş olabilir. Saniye hassasiyeti ve gün/ay sırası güvenilir değil."
+            )
 
     report["flags"] = flags
     return report
@@ -176,6 +196,11 @@ def write_audit_report(report: dict, json_path: str | Path, md_path: str | Path,
     dup = report.get("duplicates", {})
     lines += ["", "## Tekrar kayıtlar", ""]
     lines += [f"- {k}: {v}" for k, v in dup.items()]
+    by_class = report.get("duplicates_by_class")
+    if by_class:
+        lines += ["", "| Sınıf | Kayıt | Benzersiz vektör | Tekrar payı |", "|---|---:|---:|---:|"]
+        for c, d in by_class.items():
+            lines.append(f"| {c} | {d['rows']} | {d['unique_vectors']} | {d['duplicate_share']:.1%} |")
     leak = report.get("single_feature_leak_check")
     if leak:
         lines += ["", "## Tek özellikli sızıntı denetimi (yalnızca eğitim bölümü)", ""]

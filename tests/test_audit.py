@@ -52,6 +52,13 @@ class AuditTests(unittest.TestCase):
         self.assertIn("src_ip", text)
         self.assertNotIn("dst_ip", text)
 
+    def test_duplicates_by_class_are_consistent(self):
+        by_class = self.report["duplicates_by_class"]
+        self.assertEqual(sum(d["rows"] for d in by_class.values()), len(self.df))
+        for d in by_class.values():
+            self.assertLessEqual(d["unique_vectors"], d["rows"])
+            self.assertAlmostEqual(d["duplicate_share"], 1 - d["unique_vectors"] / d["rows"], places=3)
+
     def test_class_counts_match_the_frame_and_include_the_rare_class(self):
         # Sentetik kusurlar arasında rastgele tekrar kayıtlar da var; bu yüzden sayı 40'tan biraz fazla olabilir.
         expected = int((self.df["label"] == "BOTNET").sum())

@@ -8,13 +8,22 @@ from pathlib import Path
 
 DEFAULTS: dict = {
     "seed": 42,
-    "data": {"dayfirst": False},
+    # InSDN'in ham zaman damgaları gün/ay/yıl sırasındadır (bkz. docs/veri_sozlugu.md).
+    "data": {"dayfirst": True},
+    "dedupe": True,
     "split": {
         "ratios": [0.6, 0.2, 0.2],
         "names": ["train", "val", "test"],
         "strategy": "random",
-        "time_block_seconds": 300,
+        "time_block_seconds": None,
         "min_test_support": 30,
+    },
+    "cross_session": {
+        "target_files": ["metasploitable-2.csv"],
+        "shared_files": ["Normal_data.csv"],
+        "shared_target_fraction": 0.2,
+        "trainval_ratios": [0.75, 0.25],
+        "time_block_seconds": 300,
     },
     "audit": {"leak_threshold": 0.99, "leak_max_rows": 50000},
 }

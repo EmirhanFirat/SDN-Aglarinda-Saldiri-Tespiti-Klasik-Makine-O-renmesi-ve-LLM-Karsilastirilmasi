@@ -31,6 +31,9 @@ DEFAULT_LABEL_ALIASES: dict[str, str] = {
     "web_attack": "Web-Attack",
     "webattack": "Web-Attack",
     "botnet": "BOTNET",
+    # Gerçek CSV'de (metasploitable-2.csv) bu sınıfın adı 'U2R'; README ise 'Exploitation (R2L)'
+    # diyor. İki ad birbirine eşlenmedi: README ile CSV uyuşmuyor, bu docs/veri_sozlugu.md'de belgeli.
+    "u2r": "U2R",
 }
 
 

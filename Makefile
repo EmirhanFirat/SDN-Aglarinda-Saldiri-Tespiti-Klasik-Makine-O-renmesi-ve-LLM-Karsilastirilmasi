@@ -9,9 +9,9 @@ test:
 env:
 	$(PY) scripts/00_record_environment.py
 
-# Kullanım: make audit ZIP=/yol/InSDN_DatasetCSV.zip
+# Kullanım: make audit DATA=/yol/InSDN_DatasetCSV   (klasör veya .zip)
 audit:
-	$(PY) scripts/01_audit_data.py --zip $(ZIP)
+	$(PY) scripts/01_audit_data.py --data $(DATA)
 
 split:
-	$(PY) scripts/02_make_split.py --zip $(ZIP)
+	$(PY) scripts/02_make_split.py --data $(DATA)

@@ -97,11 +97,14 @@ def make_synthetic_flows(
 
     for cls, (n, n_sessions, shift, fname, _raw) in classes.items():
         sizes = rng.multinomial(n, np.ones(n_sessions) / n_sessions)
-        for size in sizes:
+        for k, size in enumerate(sizes):
             if size == 0:
                 continue
-            sidx = session_counter.get(fname, 0)
-            session_counter[fname] = sidx + 1
+            # DoS ve Probe oturumlarının yarısı "ikinci kurban" dosyasında (gerçek InSDN'deki
+            # metasploitable-2.csv gibi); böylece koşular arası bölme sınanabilir.
+            sess_file = "SYNTHETIC_Meta.csv" if (cls in ("DoS", "Probe") and k % 2 == 1) else fname
+            sidx = session_counter.get(sess_file, 0)
+            session_counter[sess_file] = sidx + 1
             offset = rng.normal(0, 0.3, size=len(FEATURES) - 2)  # oturuma özgü kayma
             start = base_time + pd.Timedelta(seconds=3600 * sidx)
             ts = start + pd.to_timedelta(rng.uniform(0, 250, size=size), unit="s")
@@ -137,7 +140,7 @@ def make_synthetic_flows(
                     "pkt_len_mean": feats[:, 9],
                     "protocol": proto,
                     "label": cls,
-                    "source_file": fname,
+                    "source_file": sess_file,
                 }
             )
             parts.append(frame)
@@ -175,7 +178,11 @@ def write_synthetic_insdn_zip(zip_path: str | Path, seed: int = 0) -> None:
         for fname, sub in df.groupby("source_file"):
             out = sub.drop(columns=["record_id", "source_file"]).copy()
             out["label"] = out["label"].map(raw_label)
-            out["timestamp"] = out["timestamp"].dt.strftime("%Y-%m-%d %H:%M:%S")
+            # Gerçek InSDN dosyalarındaki karışıklığı taklit et: bir dosyada iki zaman biçimi.
+            ts = out["timestamp"]
+            minute_24h = ts.dt.strftime("%d/%m/%Y %H:%M")
+            seconds_12h = ts.dt.strftime("%d/%m/%Y %I:%M:%S %p")
+            out["timestamp"] = minute_24h.where(np.arange(len(out)) % 2 == 0, seconds_12h)
             for col in FEATURES:
                 s = out[col].astype(object)
                 out[col] = s.where(~np.isinf(out[col].astype(float)), "Infinity")

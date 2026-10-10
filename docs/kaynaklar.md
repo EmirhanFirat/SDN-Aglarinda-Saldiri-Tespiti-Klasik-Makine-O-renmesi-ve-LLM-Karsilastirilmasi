@@ -33,9 +33,9 @@ Bu belgedeki rakamlar **kaynakların kendi iddialarıdır**; bizim ölçtüğüm
 
 - OVS sınıflarının toplamı **138.722**, metasploitable-2 sınıflarının toplamı **136.743**. README bu iki dosyanın toplamlarını yer değiştirmiş yazmış; ayrıca 138.772 değeri 138.722 ile 50 fark ediyor.
 - Sınıf toplamlarından saldırı = 275.465, genel = 343.889; README'deki 275.515 / 343.939 ile 50 kayıt farkı var.
-- Sınıf adları README'de `brute-force-attack`, `Web_attack`, `Exploitation (R2L)` biçiminde; CSV'deki gerçek yazım ve `Label` sütunu adı **doğrulanamadı**.
+- Sınıf adları README'de `brute-force-attack`, `Web_attack`, `Exploitation (R2L)` biçiminde. Gerçek CSV'lerde (bu oturumda okundu) etiket sütunu `Label`'dır ve sınıf adları `BFA`, `Web-Attack`, **`U2R`** olarak geçer; yani README'nin "Exploitation (R2L)" dediği 17 kayıt CSV'de `U2R` etiketlidir. Bu 17 kaydın gerçekten hangi saldırı türü olduğunu belge doğrulamıyor; adı etiket olarak aynen koruyoruz.
 
-Kendi sayımımız gerçek CSV'lerden çıkarılacak ve bu tabloyla karşılaştırılacaktır.
+**Kendi sayımızla karşılaştırma (gerçek CSV'ler, 343.889 satır):** sınıf toplamları README'dekilerle birebir aynı çıktı (Normal 68.424, DDoS 121.942, Probe 98.129, DoS 53.616, BFA 1.405, Web-Attack 192, BOTNET 164, U2R 17). README'nin dosya toplamları ise yanlış/yer değiştirmiş: `OVS.csv` 138.722, `metasploitable-2.csv` 136.743 satır. Genel toplam 343.889'dur (README'deki 343.939 değil).
 
 ### Doğrulanamayanlar
 

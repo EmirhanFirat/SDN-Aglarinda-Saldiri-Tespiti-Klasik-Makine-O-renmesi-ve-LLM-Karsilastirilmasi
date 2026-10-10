@@ -36,7 +36,7 @@ IDENTITY_COLUMNS = (
 )
 
 # Deney altyapısının tuttuğu yardımcı sütunlar.
-BOOKKEEPING_COLUMNS = ("record_id", "source_file", "group_id", "split", "scenario_id")
+BOOKKEEPING_COLUMNS = ("record_id", "source_file", "group_id", "split", "scenario_id", "n_copies")
 
 # Model girdisinde bulunması yasak sütunlar.
 FORBIDDEN_INPUT_COLUMNS = frozenset(
