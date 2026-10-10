@@ -10,8 +10,12 @@ matplotlib>=3.8
 psutil>=5.9          # RAM ölçümü
 joblib>=1.3
 
-# Aşama 2 (bu oturumda KURULAMADI, kod henüz yok):
-# xgboost>=2.0
+# Aşama 2: XGBoost. Kod hazır; kurulu değilse deney "atlandı" diye kaydedilir (sessizce geçilmez).
+xgboost>=2.0
+
+# Notebook'ları VS Code veya Jupyter'da çalıştırmak için
+ipykernel>=6.29
+# jupyterlab>=4      # tarayıcıda açmak isterseniz
 
 # Aşama 3 (LLM karşılaştırması, ücretli API):
 # anthropic>=0.40

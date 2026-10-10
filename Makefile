@@ -1,7 +1,7 @@
 PY ?= python3
 export PYTHONPATH := src
 
-.PHONY: test env audit split
+.PHONY: test env audit split train test-eval figures
 
 test:
 	$(PY) -m unittest discover -s tests -v
@@ -15,3 +15,12 @@ audit:
 
 split:
 	$(PY) scripts/02_make_split.py --data $(DATA)
+
+train:
+	$(PY) scripts/03_train_eval.py --data $(DATA)
+
+test-eval:
+	$(PY) scripts/03_train_eval.py --data $(DATA) --evaluate-test
+
+figures:
+	$(PY) scripts/04_make_figures.py

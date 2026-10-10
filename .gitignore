@@ -4,6 +4,8 @@ __pycache__/
 /data/
 # Üretilen raporlar (json/md) depoda kalır; kayıt bazlı büyük CSV'ler ve makineye özgü ortam kaydı kalmaz
 /outputs/**/*.csv
+/outputs/**/*.csv.gz
+/outputs/**/*.joblib
 /outputs/environment.json
 *.zip
 *.pcap
